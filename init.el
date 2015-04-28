@@ -53,20 +53,20 @@
 (require 'use-package)
 
 ;; wanted packages
+(use-package python-mode
+	 :ensure python-mode
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
+
 (use-package autopair
 	 :ensure autopair
 	 :init (progn
 		  ;; Do something after the package is initialized
 		))
 
-(use-package company
-	 :ensure company
-	 :init (progn
-		  ;; Do something after the package is initialized
-		))
-
-(use-package buffer-move
-	 :ensure buffer-move
+(use-package auto-complete
+	 :ensure auto-complete
 	 :init (progn
 		  ;; Do something after the package is initialized
 		))
@@ -76,24 +76,7 @@
 	 :init (progn
 		  ;; Do something after the package is initialized
 		))
-
-(use-package highlight-symbol
-	 :ensure highlight-symbol
-	 :init (progn
-		  ;; Do something after the package is initialized
-		))
-
-(use-package ido-hacks
-	 :ensure ido-hacks
-	 :init (progn
-		  ;; Do something after the package is initialized
-		))
-
-(use-package ido-vertical-mode
-	 :ensure ido-vertical-mode
-	 :init (progn
-		  ;; Do something after the package is initialized
-		))
+(global-flycheck-mode t)
 
 (use-package magit
 	 :ensure magit
@@ -102,48 +85,11 @@
 		))
 (setq magit-last-seen-setup-instructions "1.4.0")
 
-(use-package multiple-cursors
-	 :ensure multiple-cursors
-	 :init (progn
-		  ;; Do something after the package is initialized
-		))
-
-(use-package switch-window
-	 :ensure switch-window
-	 :init (progn
-		  ;; Do something after the package is initialized
-		))
-
-(use-package visual-regexp
-	 :ensure visual-regexp
-	 :init (progn
-		  ;; Do something after the package is initialized
-		))
-
 (use-package yasnippet
 	 :ensure yasnippet
 	 :init (progn
 		  ;; Do something after the package is initialized
 		))
-
-(use-package switch-window
-	 :ensure switch-window
-	 :init (progn
-		  ;; Do something after the package is initialized
-		))
-
-(use-package python-mode
-	 :ensure python-mode
-	 :init (progn
-		  ;; Do something after the package is initialized
-		))
-
-(use-package flymake
-	 :ensure flymake
-	 :init (progn
-		  ;; Do something after the package is initialized
-		))
-(global-flycheck-mode t)
 
 (use-package find-file-in-repository
 	 :ensure find-file-in-repository
@@ -163,31 +109,41 @@
 		  ;; Do something after the package is initialized
 		))
 
-
-;; key bindings
-(load-theme 'whiteboard t)
-(global-set-key (kbd "C-S-f") 'imenu) ;; use iMenu
-(global-set-key (kbd "C-x o") 'switch-window)
+(require 'magit)
 (global-set-key "\C-xg" 'magit-status)
+
+(require 'auto-complete)
+(require 'autopair)
+(require 'yasnippet)
+(require 'flycheck)
+(global-flycheck-mode t)
+
 (global-set-key [f7] 'find-file-in-repository)
 
-(defun ido-find-file-in-tag-files ()
-  (interactive)
-  (save-excursion
-    (let ((enable-recursive-minibuffers t))
-      (visit-tags-table-buffer))
-    (find-file
-     (expand-file-name
-      (ido-completing-read
-       "Project file: " (tags-table-files) nil t)))))
+; auto-complete mode extra settings
+(setq
+ ac-auto-start 2
+ ac-override-local-map nil
+ ac-use-menu-map t
+ ac-candidate-limit 20)
 
-(global-set-key (kbd "C-S-x C-S-f") 'ido-find-file-in-tag-files)
-
-;; Python mode settings
+;; ;; Python mode settings
+(require 'python-mode)
 (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
 (setq py-electric-colon-active t)
 (add-hook 'python-mode-hook 'autopair-mode)
 (add-hook 'python-mode-hook 'yas-minor-mode)
+
+;; ;; Jedi settings
+(require 'jedi)
+;; It's also required to run "pip install --user jedi" and "pip
+;; install --user epc" to get the Python side of the library work
+;; correctly.
+;; With the same interpreter you're using.
+
+;; if you need to change your python intepreter, if you want to change it
+;; (setq jedi:server-command
+;;       '("python2" "/home/andrea/.emacs.d/elpa/jedi-0.1.2/jediepcserver.py"))
 
 (add-hook 'python-mode-hook
 	  (lambda ()
@@ -197,20 +153,13 @@
 	    (local-set-key (kbd "M-SPC") 'jedi:complete)
 	    (local-set-key (kbd "M-.") 'jedi:goto-definition)))
 
-(add-hook 'python-mode-hook 'company-mode)
 
-;; load other init files
-(defconst user-init-dir
-  (cond ((boundp 'user-emacs-directory)
-	 user-emacs-directory)
-	((boundp 'user-init-directory)
-	 user-init-directory)
-	(t "~/.emacs.d/")))
+(add-hook 'python-mode-hook 'auto-complete-mode)
 
+(ido-mode t)
 
-(defun load-user-file (file)
-  (interactive "f")
-  "Load a file in current user's configuration directory"
-  (load-file (expand-file-name file user-init-dir)))
-
-(load-user-file "org-mode.el")
+;; -------------------- extra nice things --------------------
+;; use shift to move around windows
+(windmove-default-keybindings 'shift)
+(show-paren-mode t)
+;; Turn beep off
