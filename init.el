@@ -1,6 +1,9 @@
 (setq user-full-name "Sebastian Riedel")
 (setq user-mail-address "sebastian.riedel@ultimanet.de")
 
+;; Set abbrev file
+(setq abbrev-file-name "~/.emacs.d/abbrev_defs")
+
 ;; Ask "y" or "n" instead of "yes" or "no". Yes, laziness is great.
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -29,14 +32,14 @@
 (prefer-coding-system 'utf-8)
 
 ;; Set up el-get
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (let (el-get-master-branch)
-      (goto-char (point-max))
-      (eval-print-last-sexp))))
+;; (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+;; (unless (require 'el-get nil 'noerror)
+;;   (with-current-buffer
+;;       (url-retrieve-synchronously
+;;        "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+;;     (let (el-get-master-branch)
+;;       (goto-char (point-max))
+;;       (eval-print-last-sexp))))
 
 ;; set up  use-package
 (require 'package)
@@ -53,6 +56,8 @@
 (require 'use-package)
 
 ;; wanted packages
+(setq py-install-directory "~/.emacs.d/elpa/python-mode-20150327.438/")
+(add-to-list 'load-path py-install-directory)
 (use-package python-mode
 	 :ensure python-mode
 	 :init (progn
@@ -78,12 +83,12 @@
 		))
 (global-flycheck-mode t)
 
+(setq magit-last-seen-setup-instructions "1.4.0")
 (use-package magit
 	 :ensure magit
 	 :init (progn
 		  ;; Do something after the package is initialized
 		))
-(setq magit-last-seen-setup-instructions "1.4.0")
 
 (use-package yasnippet
 	 :ensure yasnippet
@@ -105,6 +110,12 @@
 
 (use-package jedi
 	 :ensure jedi
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
+
+(use-package virtualenv
+	 :ensure virtualenv
 	 :init (progn
 		  ;; Do something after the package is initialized
 		))
@@ -150,8 +161,9 @@
 	    (jedi:setup)
 	    (jedi:ac-setup)
 	    (local-set-key "\C-cd" 'jedi:show-doc)
-	    (local-set-key (kbd "M-SPC") 'jedi:complete)
-	    (local-set-key (kbd "M-.") 'jedi:goto-definition)))
+	    (local-set-key (kbd "C-M-SPC") 'jedi:complete)
+	    (local-set-key (kbd "C-M-.") 'jedi:goto-definition)
+	    ))
 
 
 (add-hook 'python-mode-hook 'auto-complete-mode)
@@ -160,6 +172,6 @@
 
 ;; -------------------- extra nice things --------------------
 ;; use shift to move around windows
-(windmove-default-keybindings 'shift)
+(windmove-default-keybindings 'meta)
 (show-paren-mode t)
 ;; Turn beep off
