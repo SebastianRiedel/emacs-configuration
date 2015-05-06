@@ -120,6 +120,52 @@
 		  ;; Do something after the package is initialized
 		))
 
+(use-package ido-vertical-mode
+	 :ensure ido-vertical-mode
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
+
+(use-package sublimity
+	 :ensure sublimity
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
+
+(use-package projectile
+	 :ensure projectile
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
+
+(use-package neotree
+	 :ensure neotree
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
+(setq projectile-switch-project-action 'neotree-projectile-action)
+
+(use-package find-file-in-project
+	 :ensure find-file-in-project
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
+(setq ffip-project-file ".svn")
+
+(use-package flx-ido
+	 :ensure flx-ido
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
+
+(use-package switch-window
+	 :ensure switch-window
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
+(global-set-key (kbd "C-x o") 'switch-window)
+
+
 (require 'magit)
 (global-set-key "\C-xg" 'magit-status)
 
@@ -169,9 +215,38 @@
 (add-hook 'python-mode-hook 'auto-complete-mode)
 
 (ido-mode t)
+(ido-everywhere 1)
+(ido-vertical-mode 1)
+(flx-ido-mode 1)
+;; disable ido faces to see flx highlights.
+(setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
+
+(require 'sublimity)
+(require 'sublimity-scroll)
+(sublimity-mode 1)
+
+(projectile-global-mode)
+
 
 ;; -------------------- extra nice things --------------------
 ;; use shift to move around windows
 (windmove-default-keybindings 'meta)
 (show-paren-mode t)
 ;; Turn beep off
+
+;; load other init files
+(defconst user-init-dir
+  (cond ((boundp 'user-emacs-directory)
+	 user-emacs-directory)
+	((boundp 'user-init-directory)
+	 user-init-directory)
+	(t "~/.emacs.d/")))
+
+
+(defun load-user-file (file)
+  (interactive "f")
+  "Load a file in current user's configuration directory"
+  (load-file (expand-file-name file user-init-dir)))
+
+(load-user-file "org-mode.el")
