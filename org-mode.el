@@ -4,6 +4,8 @@
 (setq org-log-done t)
 (setq org-agenda-files (list "~/org/gtd.org"))
 (setq org-default-notes-file (concat org-directory "/journal.org"))
+(setq org-archive-location "archive_gtd.org::datetree/")
+(setq org-tag-persistent-alist '(("OFFICE" . ?o) ("HOME" . ?h) ("READING" . ?r) ("TV" . ?t) ("COMPUTER" . ?c) ("LUNCHTIME" . ?l) ("FRIENDS" . ?f) ("PROJECT" . ?p)))
 (define-key global-map "\C-cc" 'org-capture)
 (defun gtd ()
    (interactive)
