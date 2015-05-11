@@ -24,6 +24,14 @@
    (interactive)
    (find-file "~/org/someday.org")
 )
+(defun private ()
+  (interactive)
+  (find-file "~/org/private.org")
+)
+(defun work ()
+  (interactive)
+  (find-file "~/org/work.org")
+)
 
 ;;
 ;; templates for capturing notes and todos
