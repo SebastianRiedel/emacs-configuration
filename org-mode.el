@@ -15,6 +15,35 @@
 (setq org-log-done 'time)
 (setq org-agenda-custom-commands (quote (("H" "Agenda and tagged TODOs" ((agenda "" nil) (tags-todo "{\\(OFFICE\\|HOME\\|COMPUTER\\|FRIENDS\\|READING\\|TV\\)}-SCHEDULED>=\"<2008-10-11>\"" nil)) nil nil) ("D" "Daily Action List" ((agenda "" ((org-agenda-ndays 1) (org-agenda-sorting-strategy (quote ((agenda time-up priority-down tag-up)))) (org-deadline-warning-days 0)))) nil))))
 
+(require 'org-publish)
+(setq org-export-with-tags nil)
+(setq org-export-with-timestamps nil)
+(setq org-export-with-toc 3)
+(setq org-publish-project-alist
+      '(
+
+       ("org-notes"
+        :base-directory "~/org/"
+        :base-extension "org"
+        :publishing-directory "~/org_html/"
+        :recursive t
+        :publishing-function org-publish-org-to-html
+        :headline-levels 10             ; Just the default for this project.
+        :auto-preamble t
+        )
+
+       ("org-static"
+        :base-directory "~/org/"
+        :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+        :publishing-directory "~/org_html/"
+        :recursive t
+        :publishing-function org-publish-attachment
+        )
+
+       ("org" :components ("org-notes" "org-static"))
+
+      ))
+
 ;;
 ;; hot keys for fast opening specific org-files
 (defun gtd ()
