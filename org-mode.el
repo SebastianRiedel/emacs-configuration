@@ -9,6 +9,7 @@
 (setq org-refile-targets (quote (("~/org/archive_gtd.org" :maxlevel . 2) ("~/org/someday.org" :maxlevel . 2) (org-agenda-files :maxlevel . 2))))
 (define-key global-map "\C-cc" 'org-capture)
 (setq org-startup-truncated nil)
+(setq org-startup-indented 1)
 (setq org-agenda-custom-commands (quote (("H" "Agenda and tagged TODOs" ((agenda "" nil) (tags-todo "{\\(OFFICE\\|HOME\\|COMPUTER\\|FRIENDS\\|READING\\|TV\\)}-SCHEDULED>=\"<2008-10-11>\"" nil)) nil nil) ("D" "Daily Action List" ((agenda "" ((org-agenda-ndays 1) (org-agenda-sorting-strategy (quote ((agenda time-up priority-down tag-up)))) (org-deadline-warning-days 0)))) nil))))
 
 ;;
@@ -38,11 +39,11 @@
 ;; templates for capturing notes and todos
 (setq org-capture-templates
       '(("i" "Immediate Todo, goes on tasks list" entry (file+headline "~/org/gtd.org" "Tasks")
-	 "* TODO %?\n")
-	("t" "New Todo, goes into journal for refiling" entry (file+headline "~/org/journal.org" "Tasks")
-	 "* TODO %?\n")
-	("j" "Journal" entry (file+datetree "~/org/journal.org")
-	 "* %?\n")))
+         "* TODO %?\n")
+        ("t" "New Todo, goes into journal for refiling" entry (file+headline "~/org/journal.org" "Tasks")
+         "* TODO %?\n")
+        ("j" "Journal" entry (file+datetree "~/org/journal.org")
+         "* %?\n")))
 
 ;;
 ;;"Switch entry to DONE when all subentries are done, to TODO otherwise."
