@@ -18,27 +18,27 @@
 (require 'org-publish)
 (setq org-export-with-tags nil)
 (setq org-export-with-timestamps nil)
-(setq org-export-with-toc 3)
+(setq org-export-with-toc 2)
 (setq org-publish-project-alist
       '(
 
        ("org-notes"
-        :base-directory "~/org/"
-        :base-extension "org"
-        :publishing-directory "~/org_html/"
-        :recursive t
-        :publishing-function org-publish-org-to-html
-        :headline-levels 10             ; Just the default for this project.
-        :auto-preamble t
-        )
+	:base-directory "~/org/"
+	:base-extension "org"
+	:publishing-directory "~/org_html/"
+	:recursive t
+	:publishing-function org-publish-org-to-html
+	:headline-levels 10             ; Just the default for this project.
+	:auto-preamble t
+	)
 
        ("org-static"
-        :base-directory "~/org/"
-        :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-        :publishing-directory "~/org_html/"
-        :recursive t
-        :publishing-function org-publish-attachment
-        )
+	:base-directory "~/org/"
+	:base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+	:publishing-directory "~/org_html/"
+	:recursive t
+	:publishing-function org-publish-attachment
+	)
 
        ("org" :components ("org-notes" "org-static"))
 
@@ -71,11 +71,11 @@
 ;; templates for capturing notes and todos
 (setq org-capture-templates
       '(("i" "Immediate Todo, goes on tasks list" entry (file+headline "~/org/gtd.org" "Tasks")
-         "* TODO %?\n")
-        ("t" "New Todo, goes into journal for refiling" entry (file+headline "~/org/journal.org" "Tasks")
-         "* TODO %?\n")
-        ("j" "Journal" entry (file+datetree "~/org/journal.org")
-         "* %?\n")))
+	 "* TODO %?\n")
+	("t" "New Todo, goes into journal for refiling" entry (file+headline "~/org/journal.org" "Tasks")
+	 "* TODO %?\n")
+	("j" "Journal" entry (file+datetree "~/org/journal.org")
+	 "* %?\n")))
 
 ;;
 ;;"Switch entry to DONE when all subentries are done, to TODO otherwise."
