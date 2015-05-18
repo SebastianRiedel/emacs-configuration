@@ -48,8 +48,8 @@
 
 (require 'package)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.org/packages/")))
+			 ("marmalade" . "http://marmalade-repo.org/packages/")
+			 ("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -66,66 +66,66 @@
 (setq py-install-directory "~/.emacs.d/elpa/python-mode-20150327.438/")
 (add-to-list 'load-path py-install-directory)
 (use-package python-mode
-         :ensure python-mode
-         :init (progn
-                  ;; Do something after the package is initialized
-                ))
+	 :ensure python-mode
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
 
 (use-package autopair
-         :ensure autopair
-         :init (progn
-                  ;; Do something after the package is initialized
-                ))
+	 :ensure autopair
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
 
 (use-package auto-complete
-         :ensure auto-complete
-         :init (progn
-                  ;; Do something after the package is initialized
-                ))
+	 :ensure auto-complete
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
 
 (use-package flycheck
-         :ensure flycheck
-         :init (progn
-                  ;; Do something after the package is initialized
-                ))
+	 :ensure flycheck
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
 (global-flycheck-mode t)
 
 (setq magit-last-seen-setup-instructions "1.4.0")
 (use-package magit
-         :ensure magit
-         :init (progn
-                  ;; Do something after the package is initialized
-                ))
+	 :ensure magit
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
 
 (use-package yasnippet
-         :ensure yasnippet
-         :init (progn
-                  ;; Do something after the package is initialized
-                ))
+	 :ensure yasnippet
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
 
 (use-package find-file-in-repository
-         :ensure find-file-in-repository
-         :init (progn
-                  ;; Do something after the package is initialized
-                ))
+	 :ensure find-file-in-repository
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
 
 (use-package python-environment
-         :ensure python-environment
-         :init (progn
-                  ;; Do something after the package is initialized
-                ))
+	 :ensure python-environment
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
 
 (use-package jedi
-         :ensure jedi
-         :init (progn
-                  ;; Do something after the package is initialized
-                ))
+	 :ensure jedi
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
 
 (use-package virtualenv
-         :ensure virtualenv
-         :init (progn
-                  ;; Do something after the package is initialized
-                ))
+	 :ensure virtualenv
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
 
 ;; (use-package ido-vertical-mode
 ;;       :ensure ido-vertical-mode
@@ -134,10 +134,10 @@
 ;;              ))
 
 (use-package sublimity
-         :ensure sublimity
-         :init (progn
-                  ;; Do something after the package is initialized
-                ))
+	 :ensure sublimity
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
 
 ;; (use-package projectile
 ;;       :ensure projectile
@@ -166,23 +166,23 @@
 ;;              ))
 
 (use-package switch-window
-         :ensure switch-window
-         :init (progn
-                  ;; Do something after the package is initialized
-                ))
+	 :ensure switch-window
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
 (global-set-key (kbd "C-x o") 'switch-window)
 
 (use-package helm
-         :ensure helm
-         :init (progn
-                  ;; Do something after the package is initialized
-                ))
+	 :ensure helm
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
 
 (use-package helm-projectile
-         :ensure helm-projectile
-         :init (progn
-                  ;; Do something after the package is initialized
-                ))
+	 :ensure helm-projectile
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
 (require 'helm-projectile)
 
 
@@ -210,6 +210,7 @@
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-c h g") 'helm-google-suggest)
 (global-set-key (kbd "C-c h g") 'helm-google-suggest)
+(global-set-key (kbd "C-c s") 'helm-org-agenda-files-headings)
 
 
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
@@ -271,13 +272,13 @@
 ;;       '("python2" "/home/andrea/.emacs.d/elpa/jedi-0.1.2/jediepcserver.py"))
 
 (add-hook 'python-mode-hook
-          (lambda ()
-            (jedi:setup)
-            (jedi:ac-setup)
-            (local-set-key "\C-cd" 'jedi:show-doc)
-            (local-set-key (kbd "C-M-SPC") 'jedi:complete)
-            (local-set-key (kbd "C-M-.") 'jedi:goto-definition)
-            ))
+	  (lambda ()
+	    (jedi:setup)
+	    (jedi:ac-setup)
+	    (local-set-key "\C-cd" 'jedi:show-doc)
+	    (local-set-key (kbd "C-M-SPC") 'jedi:complete)
+	    (local-set-key (kbd "C-M-.") 'jedi:goto-definition)
+	    ))
 
 
 (add-hook 'python-mode-hook 'auto-complete-mode)
@@ -302,10 +303,10 @@
 
 (defconst user-init-dir
   (cond ((boundp 'user-emacs-directory)
-         user-emacs-directory)
-        ((boundp 'user-init-directory)
-         user-init-directory)
-        (t "~/.emacs.d/")))
+	 user-emacs-directory)
+	((boundp 'user-init-directory)
+	 user-init-directory)
+	(t "~/.emacs.d/")))
 
 
 (defun load-user-file (file)
