@@ -42,6 +42,9 @@
 ;; use shift to move around windows
 (windmove-default-keybindings 'meta)
 
+;; use firefox as default browser
+(setq browse-url-browser-function 'browse-url-firefox)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Use Package - Setup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -206,7 +209,7 @@
 (global-unset-key (kbd "C-x c"))
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-(global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-x b") 'helm-multi-files)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-c h g") 'helm-google-suggest)
 (global-set-key (kbd "C-c h g") 'helm-google-suggest)
@@ -232,7 +235,9 @@
       helm-semantic-fuzzy-match t
       helm-imenu-fuzzy-match    t
       helm-google-suggest-default-browser-function 'browse-url-firefox
-      helm-surfraw-default-browser-function 'browse-url-firefox)
+      helm-surfraw-default-browser-function 'browse-url-firefox
+      helm-google-suggest-search-url "http://www.google.com/search?source=ig&hl=en&rlz=1G1GGLQ_ENUS264&q=%s&btnI=I'm+Feeling+Lucky")
+
 
 (helm-mode 1)
 (semantic-mode 1)
