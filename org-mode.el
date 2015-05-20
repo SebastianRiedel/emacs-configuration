@@ -107,3 +107,33 @@
   (let (org-log-done org-log-states)   ; turn off logging
        (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
 (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+
+;; screenshot function
+(defun my/img-maker ()
+ "Make folder if not exist, define image name based on time/date"
+  (setq myvar/img-folder-path (concat default-directory "img/"))
+
+  ; Make img folder if it doesn't exist.
+  (if (not (file-exists-p myvar/img-folder-path)) ;[ ] refactor thir and screenshot code.
+       (mkdir myvar/img-folder-path))
+
+  (setq myvar/img-name (concat "img_" (format-time-string "%Y_%m_%d__%H_%M_%S") ".png"))
+  (setq myvar/img-Abs-Path (concat myvar/img-folder-path myvar/img-name)) ;Relative to workspace.
+
+  (setq myvar/relative-filename (concat "./img/" myvar/img-name))
+  (insert "[[" myvar/relative-filename "]]" "\n")
+)
+
+(defun my/org-screenshot ()
+  "Take a screenshot into a time stamped unique-named file in the
+ sub-directory (%filenameIMG) as the org-buffer and insert a link to this file."
+  (interactive)
+  (my/img-maker)
+  ;(make-frame-invisible)
+  (lower-frame)
+  (call-process "import" nil nil nil myvar/img-Abs-Path)
+
+  (raise-frame)
+  ;(make-frame-visible)
+  (org-display-inline-images)
+)
