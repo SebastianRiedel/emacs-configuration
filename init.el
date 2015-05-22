@@ -45,6 +45,9 @@
 ;; use firefox as default browser
 (setq browse-url-browser-function 'browse-url-firefox)
 
+;; save last session
+(desktop-save-mode 1)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Use Package - Setup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -93,7 +96,6 @@
 	 :init (progn
 		  ;; Do something after the package is initialized
 		))
-(global-flycheck-mode t)
 
 (setq magit-last-seen-setup-instructions "1.4.0")
 (use-package magit
@@ -132,12 +134,6 @@
 		  ;; Do something after the package is initialized
 		))
 
-;; (use-package ido-vertical-mode
-;;       :ensure ido-vertical-mode
-;;       :init (progn
-;;                ;; Do something after the package is initialized
-;;              ))
-
 (use-package sublimity
 	 :ensure sublimity
 	 :init (progn
@@ -149,149 +145,62 @@
 	 :init (progn
 		  ;; Do something after the package is initialized
 		 ))
-(require 'helm)
-(require 'helm-config)
 
 (use-package projectile
       :ensure projectile
       :init (progn
 	       ;; Do something after the package is initialized
 	      ))
-(require 'projectile)
 
 (use-package helm-projectile
 	 :ensure helm-projectile
 	 :init (progn
 		  ;; Do something after the package is initialized
 		 ))
-(require 'helm-projectile)
-(projectile-global-mode)
-(helm-projectile-on)
-
-
-;; (use-package neotree
-;;       :ensure neotree
-;;       :init (progn
-;;                ;; Do something after the package is initialized
-;;              ))
-;; (setq projectile-switch-project-action 'neotree-projectile-action)
-
-;; (use-package find-file-in-project
-;;       :ensure find-file-in-project
-;;       :init (progn
-;;                ;; Do something after the package is initialized
-;;              ))
-;; (setq ffip-project-file ".svn")
-
-;; (use-package flx-ido
-;;       :ensure flx-ido
-;;       :init (progn
-;;                ;; Do something after the package is initialized
-;;              ))
 
 (use-package switch-window
 	 :ensure switch-window
 	 :init (progn
 		  ;; Do something after the package is initialized
 		))
-(global-set-key (kbd "C-x o") 'switch-window)
 
 (use-package parsebib
 	 :ensure parsebib
 	 :init (progn
 		  ;; Do something after the package is initialized
 		))
-(require 'parsebib)
+
 (use-package s
 	 :ensure s
 	 :init (progn
 		  ;; Do something after the package is initialized
 		))
-(require 's)
+
 (use-package f
 	 :ensure f
 	 :init (progn
 		  ;; Do something after the package is initialized
 		))
-(require 'f)
 
 (use-package dash
 	 :ensure dash
 	 :init (progn
 		  ;; Do something after the package is initialized
 		))
-(require 'dash)
-
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Package-Specific Settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; switch window
+(global-set-key (kbd "C-x o") 'switch-window)
+
+;; flycheck
+(global-flycheck-mode t)
+
 ;; ---- magit
 (require 'magit)
 (global-set-key "\C-xg" 'magit-status)
-
-(require 'helm)
-(require 'helm-config)
-
-;; configure helm-bibtex
-(autoload 'helm-bibtex "helm-bibtex" "" t)
-(setq helm-bibtex-bibliography '("~/org/refs.bib"))
-(setq helm-bibtex-library-path '(( "/volume/USERSTORE/ried_sa/papers/vault")))
-(setq helm-bibtex-notes-path "~/org/work.org")
-(setq helm-bibtex-notes-extension nil)
-(setq helm-bibtex-pdf-open-function
-  (lambda (fpath)
-    (start-process "evince" "*helm-bibtex-evince*" "/usr/bin/evince" fpath)))
-(setq helm-bibtex-notes-template "\n* ${author} (${year}): ${title}\n  :PROPERTIES:\n  :BIBTEX-KEY: ${=key=}\n  :END:\n** What?\n** Why?\n** How?\n** Any good?\n")
-
-;; ---- helm
-;;(setq projectile-completion-system 'helm)
-;;(require 'helm-projectile)
-;;(helm-projectile-on)
-;;(setq projectile-switch-project-action 'helm-projectile)
-
-;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
-;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
-;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
-(global-set-key (kbd "C-c h") 'helm-command-prefix)
-(global-unset-key (kbd "C-x c"))
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "M-y") 'helm-show-kill-ring)
-(global-set-key (kbd "C-x b") 'helm-multi-files)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-c h g") 'helm-google-suggest)
-(global-set-key (kbd "C-c h g") 'helm-google-suggest)
-(global-set-key (kbd "C-c s") 'helm-org-agenda-files-headings)
-(global-set-key (kbd "C-c b") 'helm-bibtex)
-
-
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
-(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
-(define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
-
-(when (executable-find "curl")
-  (setq helm-google-suggest-use-curl-p t))
-
-
-(setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
-      helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
-      helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
-      helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
-      helm-ff-file-name-history-use-recentf t
-      helm-M-x-fuzzy-match                  t ; enable fuzzy matching
-      helm-buffers-fuzzy-matching           t ; --
-      helm-recentf-fuzzy-match              t
-      helm-semantic-fuzzy-match t
-      helm-imenu-fuzzy-match    t
-      helm-google-suggest-default-browser-function 'browse-url-firefox
-      helm-surfraw-default-browser-function 'browse-url-firefox
-      helm-google-suggest-search-url "http://www.google.com/search?source=ig&hl=en&rlz=1G1GGLQ_ENUS264&q=%s&btnI=I'm+Feeling+Lucky")
-
-
-(helm-mode 1)
-(semantic-mode 1)
 
 ;; ---- others
 (require 'auto-complete)
@@ -301,60 +210,10 @@
 (global-flycheck-mode t)
 ;;(global-set-key [f7] 'find-file-in-repository)
 
-
-;; ---- auto-complete mode extra settings
-(setq
- ac-auto-start 2
- ac-override-local-map nil
- ac-use-menu-map t
- ac-candidate-limit 20)
-
-;; ---- Python mode settings
-(require 'python-mode)
-(add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
-(setq py-electric-colon-active t)
-(add-hook 'python-mode-hook 'autopair-mode)
-(add-hook 'python-mode-hook 'yas-minor-mode)
-
-;; ---- Jedi settings
-(require 'jedi)
-;; It's also required to run "pip install --user jedi" and "pip
-;; install --user epc" to get the Python side of the library work
-;; correctly.
-;; With the same interpreter you're using.
-
-;; if you need to change your python intepreter, if you want to change it
-;; (setq jedi:server-command
-;;       '("python2" "/home/andrea/.emacs.d/elpa/jedi-0.1.2/jediepcserver.py"))
-
-(add-hook 'python-mode-hook
-	  (lambda ()
-	    (jedi:setup)
-	    (jedi:ac-setup)
-	    (local-set-key "\C-cd" 'jedi:show-doc)
-	    (local-set-key (kbd "C-M-SPC") 'jedi:complete)
-	    (local-set-key (kbd "C-M-.") 'jedi:goto-definition)
-	    ))
-
-
-(add-hook 'python-mode-hook 'auto-complete-mode)
-
-;;(ido-mode t)
-;;(ido-everywhere 1)
-;;(ido-vertical-mode 1)
-;;(flx-ido-mode 1)
-;; disable ido faces to see flx highlights.
-;;(setq ido-enable-flex-matching t)
-;;(setq ido-use-faces nil)
-
 ;; ---- sublimity
 (require 'sublimity)
 (require 'sublimity-scroll)
 (sublimity-mode 1)
-
-;; save last session
-(desktop-save-mode 1)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Load other init files
@@ -374,3 +233,4 @@
   (load-file (expand-file-name file user-init-dir)))
 
 (load-user-file "org-mode.el")
+(load-user-file "conf-helm.el")
