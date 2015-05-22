@@ -68,6 +68,8 @@
 
 (setq py-install-directory "~/.emacs.d/elpa/python-mode-20150327.438/")
 (add-to-list 'load-path py-install-directory)
+(add-to-list 'load-path "/volume/USERSTORE/ried_sa/software/helm-bibtex/")
+
 (use-package python-mode
 	 :ensure python-mode
 	 :init (progn
@@ -140,13 +142,32 @@
 	 :ensure sublimity
 	 :init (progn
 		  ;; Do something after the package is initialized
-		))
+		 ))
 
-;; (use-package projectile
-;;       :ensure projectile
-;;       :init (progn
-;;                ;; Do something after the package is initialized
-;;              ))
+(use-package helm
+	 :ensure helm
+	 :init (progn
+		  ;; Do something after the package is initialized
+		 ))
+(require 'helm)
+(require 'helm-config)
+
+(use-package projectile
+      :ensure projectile
+      :init (progn
+	       ;; Do something after the package is initialized
+	      ))
+(require 'projectile)
+
+(use-package helm-projectile
+	 :ensure helm-projectile
+	 :init (progn
+		  ;; Do something after the package is initialized
+		 ))
+(require 'helm-projectile)
+(projectile-global-mode)
+(helm-projectile-on)
+
 
 ;; (use-package neotree
 ;;       :ensure neotree
@@ -175,25 +196,32 @@
 		))
 (global-set-key (kbd "C-x o") 'switch-window)
 
-(use-package helm
-	 :ensure helm
+(use-package parsebib
+	 :ensure parsebib
 	 :init (progn
 		  ;; Do something after the package is initialized
 		))
+(require 'parsebib)
+(use-package s
+	 :ensure s
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
+(require 's)
+(use-package f
+	 :ensure f
+	 :init (progn
+		  ;; Do something after the package is initialized
+		))
+(require 'f)
 
-(use-package helm-projectile
-	 :ensure helm-projectile
+(use-package dash
+	 :ensure dash
 	 :init (progn
 		  ;; Do something after the package is initialized
 		))
-(require 'helm-projectile)
+(require 'dash)
 
-(use-package reftex
-	 :ensure reftex
-	 :init (progn
-		  ;; Do something after the package is initialized
-		))
-(require 'reftex)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -204,9 +232,25 @@
 (require 'magit)
 (global-set-key "\C-xg" 'magit-status)
 
-;; ---- helm
 (require 'helm)
 (require 'helm-config)
+
+;; configure helm-bibtex
+(autoload 'helm-bibtex "helm-bibtex" "" t)
+(setq helm-bibtex-bibliography '("~/org/refs.bib"))
+(setq helm-bibtex-library-path '(( "/volume/USERSTORE/ried_sa/papers/vault")))
+(setq helm-bibtex-notes-path "~/org/work.org")
+(setq helm-bibtex-notes-extension nil)
+(setq helm-bibtex-pdf-open-function
+  (lambda (fpath)
+    (start-process "evince" "*helm-bibtex-evince*" "/usr/bin/evince" fpath)))
+(setq helm-bibtex-notes-template "\n* ${author} (${year}): ${title}\n  :PROPERTIES:\n  :BIBTEX-KEY: ${=key=}\n  :END:\n** What?\n** Why?\n** How?\n** Any good?\n")
+
+;; ---- helm
+;;(setq projectile-completion-system 'helm)
+;;(require 'helm-projectile)
+;;(helm-projectile-on)
+;;(setq projectile-switch-project-action 'helm-projectile)
 
 ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
 ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
@@ -220,6 +264,7 @@
 (global-set-key (kbd "C-c h g") 'helm-google-suggest)
 (global-set-key (kbd "C-c h g") 'helm-google-suggest)
 (global-set-key (kbd "C-c s") 'helm-org-agenda-files-headings)
+(global-set-key (kbd "C-c b") 'helm-bibtex)
 
 
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
@@ -255,7 +300,7 @@
 (require 'flycheck)
 (global-flycheck-mode t)
 ;;(global-set-key [f7] 'find-file-in-repository)
-;;(projectile-global-mode)
+
 
 ;; ---- auto-complete mode extra settings
 (setq
@@ -306,6 +351,9 @@
 (require 'sublimity)
 (require 'sublimity-scroll)
 (sublimity-mode 1)
+
+;; save last session
+(desktop-save-mode 1)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
