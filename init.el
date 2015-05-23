@@ -3,7 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq user-full-name "Sebastian Riedel")
-(setq user-mail-address "sebastian.riedel@dlr.de")
+(setq user-mail-address "sebastian.riedel@ultimanet.de")
 
 ;; Set abbrev file
 (setq abbrev-file-name "~/.emacs.d/abbrev_defs")
