@@ -71,7 +71,7 @@
 
 (setq py-install-directory "~/.emacs.d/elpa/python-mode-20150327.438/")
 (add-to-list 'load-path py-install-directory)
-(add-to-list 'load-path "/volume/USERSTORE/ried_sa/software/helm-bibtex/")
+(add-to-list 'load-path "~/software/helm-bibtex/")
 
 (use-package python-mode
 	 :ensure python-mode
@@ -186,7 +186,14 @@
 	 :ensure dash
 	 :init (progn
 		  ;; Do something after the package is initialized
-		))
+		 ))
+
+(use-package helm-gtags
+	 :ensure helm-gtags
+	 :init (progn
+		  ;; Do something after the package is initialized
+		 ))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Package-Specific Settings
