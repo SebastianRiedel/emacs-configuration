@@ -18,7 +18,7 @@
 (setq-default highlight-tabs t)
 
 ;; Show trailing white spaces
-(setq-default show-trailing-whitespace t)
+;;(setq-default show-trailing-whitespace t)
 
 ;; Remove useless whitespace before saving a file
 (add-hook 'before-save-hook 'whitespace-cleanup)
@@ -46,7 +46,15 @@
 (setq browse-url-browser-function 'browse-url-firefox)
 
 ;; save last session
-(desktop-save-mode 1)
+;;(desktop-save-mode 1)
+
+(setq auto-mode-alist
+      (append '((".*\\.txt\\'" . sh-mode))
+	      auto-mode-alist))
+
+(setq auto-mode-alist
+      (append '((".*\\.lnc\\'" . sh-mode))
+	      auto-mode-alist))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Use Package - Setup
@@ -69,72 +77,72 @@
 ;; Packages to Install if necessary
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq py-install-directory "~/.emacs.d/elpa/python-mode-20150327.438/")
-(add-to-list 'load-path py-install-directory)
+;;(setq py-install-directory "~/.emacs.d/elpa/python-mode-20150327.438/")
+;;(add-to-list 'load-path py-install-directory)
 (add-to-list 'load-path "~/software/helm-bibtex/")
-(add-to-list 'load-path "~/software/orgmode-mediawiki/")
+;;(add-to-list 'load-path "~/software/orgmode-mediawiki/")
 
 
-(use-package python-mode
-	 :ensure python-mode
-	 :init (progn
-		  ;; Do something after the package is initialized
-		))
+;;(use-package python-mode
+;;	 :ensure python-mode
+;;	 :init (progn
+;;		  ;; Do something after the package is initialized
+;;		))
 
-(use-package autopair
-	 :ensure autopair
-	 :init (progn
-		  ;; Do something after the package is initialized
-		))
+;;(use-package autopair
+;;	 :ensure autopair
+;;	 :init (progn
+;;		  ;; Do something after the package is initialized
+;;		))
 
-(use-package auto-complete
-	 :ensure auto-complete
-	 :init (progn
-		  ;; Do something after the package is initialized
-		))
+;;(use-package auto-complete
+;;	 :ensure auto-complete
+;;	 :init (progn
+;;		  ;; Do something after the package is initialized
+;;		))
 
-(use-package flycheck
-	 :ensure flycheck
-	 :init (progn
-		  ;; Do something after the package is initialized
-		))
+;;(use-package flycheck
+;;	 :ensure flycheck
+;;	 :init (progn
+;;		  ;; Do something after the package is initialized
+;;		))
 
-(setq magit-last-seen-setup-instructions "1.4.0")
-(use-package magit
-	 :ensure magit
-	 :init (progn
-		  ;; Do something after the package is initialized
-		))
+;;(setq magit-last-seen-setup-instructions "1.4.0")
+;;(use-package magit
+;;	 :ensure magit
+;;	 :init (progn
+;;		  ;; Do something after the package is initialized
+;;		))
 
-(use-package yasnippet
-	 :ensure yasnippet
-	 :init (progn
-		  ;; Do something after the package is initialized
-		))
+;;(use-package yasnippet
+;;	 :ensure yasnippet
+;;	 :init (progn
+;;		  ;; Do something after the package is initialized
+;;		))
 
-(use-package find-file-in-repository
-	 :ensure find-file-in-repository
-	 :init (progn
-		  ;; Do something after the package is initialized
-		))
+;;(use-package find-file-in-repository
+;;	 :ensure find-file-in-repository
+;;	 :init (progn
+;;		  ;; Do something after the package is initialized
+;;		))
 
-(use-package python-environment
-	 :ensure python-environment
-	 :init (progn
-		  ;; Do something after the package is initialized
-		))
+;;(use-package python-environment
+;;	 :ensure python-environment
+;;	 :init (progn
+;;		  ;; Do something after the package is initialized
+;;		))
 
-(use-package jedi
-	 :ensure jedi
-	 :init (progn
-		  ;; Do something after the package is initialized
-		))
+;;(use-package jedi
+;;	 :ensure jedi
+;;	 :init (progn
+;;		  ;; Do something after the package is initialized
+;;		))
 
-(use-package virtualenv
-	 :ensure virtualenv
-	 :init (progn
-		  ;; Do something after the package is initialized
-		))
+;;(use-package virtualenv
+;;	 :ensure virtualenv
+;;	 :init (progn
+;;		  ;; Do something after the package is initialized
+;;		))
 
 (use-package sublimity
 	 :ensure sublimity
@@ -190,11 +198,11 @@
 		  ;; Do something after the package is initialized
 		 ))
 
-(use-package helm-gtags
-	 :ensure helm-gtags
-	 :init (progn
-		  ;; Do something after the package is initialized
-		 ))
+;;(use-package helm-gtags
+;;	 :ensure helm-gtags
+;;	 :init (progn
+;;		  ;; Do something after the package is initialized
+;;		 ))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -202,21 +210,21 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; switch window
-(global-set-key (kbd "C-x o") 'switch-window)
+;;(global-set-key (kbd "C-x o") 'switch-window)
 
 ;; flycheck
-(global-flycheck-mode t)
+;;(global-flycheck-mode t)
 
 ;; ---- magit
-(require 'magit)
-(global-set-key "\C-xg" 'magit-status)
+;;(require 'magit)
+;;(global-set-key "\C-xg" 'magit-status)
 
 ;; ---- others
-(require 'auto-complete)
-(require 'autopair)
-(require 'yasnippet)
-(require 'flycheck)
-(global-flycheck-mode t)
+;;(require 'auto-complete)
+;;(require 'autopair)
+;;(require 'yasnippet)
+;(require 'flycheck)
+;;(global-flycheck-mode t)
 ;;(global-set-key [f7] 'find-file-in-repository)
 
 ;; ---- sublimity
