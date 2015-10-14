@@ -72,6 +72,8 @@
 (setq py-install-directory "~/.emacs.d/elpa/python-mode-20150327.438/")
 (add-to-list 'load-path py-install-directory)
 (add-to-list 'load-path "~/software/helm-bibtex/")
+(add-to-list 'load-path "~/software/orgmode-mediawiki/")
+
 
 (use-package python-mode
 	 :ensure python-mode
