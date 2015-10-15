@@ -54,7 +54,7 @@
 (autoload 'helm-bibtex "helm-bibtex" "" t)
 
 (setq helm-bibtex-bibliography '("~/org/refs.bib"))
-(setq helm-bibtex-library-path '(( "/volume/USERSTORE/ried_sa/papers/vault")))
+(setq helm-bibtex-library-path (getenv "HELM_PAPER_VAULT_DIR"))
 (setq helm-bibtex-notes-path "~/org/work.org")
 (setq helm-bibtex-notes-extension nil)
 (setq helm-bibtex-pdf-open-function
