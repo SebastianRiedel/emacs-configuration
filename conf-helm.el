@@ -17,9 +17,8 @@
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-x b") 'helm-multi-files)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-c h g") 'helm-google-suggest)
-(global-set-key (kbd "C-c h g") 'helm-google-suggest)
-(global-set-key (kbd "C-c s") 'helm-org-agenda-files-headings)
+(global-set-key (kbd "C-c g") 'helm-google-suggest)
+(global-set-key (kbd "C-c o") 'helm-org-agenda-files-headings)
 (global-set-key (kbd "C-c b") 'helm-bibtex)
 
 
