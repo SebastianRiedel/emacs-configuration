@@ -80,8 +80,10 @@
 ;;(setq py-install-directory "~/.emacs.d/elpa/python-mode-20150327.438/")
 ;;(add-to-list 'load-path py-install-directory)
 (add-to-list 'load-path "~/software/helm-bibtex/")
-;;(add-to-list 'load-path "~/software/orgmode-mediawiki/")
+(add-to-list 'load-path "~/software/org/release_8.3.4/lisp")
+(add-to-list 'load-path "~/software/orgmode-mediawiki/")
 
+;;(require 'ox-mediawiki)
 
 ;;(use-package python-mode
 ;;	 :ensure python-mode
